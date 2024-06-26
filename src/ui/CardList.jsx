@@ -16,7 +16,7 @@ function CardList() {
     [dispatch]
   );
   return (
-    <div className="grid grid-cols-3 gap-4 mt-4 w-3/4 mx-auto">
+    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 w-3/4 mx-auto my-5">
       {users.map((user) => (
         <Card key={user.uid} userInfo={user} />
       ))}
