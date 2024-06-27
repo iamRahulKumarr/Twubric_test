@@ -25,6 +25,7 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+// helper function for the sorting actions
 const sortUsers = (state, sortBy) => {
   if (state.sortBy !== sortBy) {
     state.sortBy = sortBy;
@@ -61,12 +62,12 @@ const userSlice = createSlice({
       sortUsers(state, 'chirpiness');
     },
     filterUserByDate(state, action) {
-      const startDate = new Date(action.payload.start[0]).getTime();
-      const endDate = new Date(action.payload.end[0]).getTime();
-      console.log(startDate, endDate);
+      //get start and end in milliseconds
+      const startDate = new Date(action.payload.start).getTime();
+      const endDate = new Date(action.payload.end).getTime();
       state.users = [...state.users].filter(
         (user) =>
-          user.join_date * 1000 >= startDate && user.join_date * 1000 <= endDate
+          user.join_date * 1000 >= startDate && user.join_date * 1000 <= endDate //convert join_date to milliseconds
       );
     },
   },
@@ -97,6 +98,7 @@ export const {
   filterUserByDate,
 } = userSlice.actions;
 
+//getter for the state for useSelector
 export const getUserState = (state) => state.user;
 
 export default userReducer;
